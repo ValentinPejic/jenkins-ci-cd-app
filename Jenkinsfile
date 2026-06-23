@@ -17,15 +17,16 @@ pipeline {
 
         stage('Test') {
             steps {
-                echo "No tests for Node app"
+                echo "No tests"
             }
         }
 
         stage('Deploy') {
             steps {
                 sh '''
-                ssh ubuntu@54.221.66.255 "
+                ssh -i /tmp/EC2-Ubuntu-Key.pem ubuntu@100.58.114.50 "
                     pkill node || true
+                    cd ~/app
                     nohup node app.js > app.log 2>&1 &
                 "
                 '''
