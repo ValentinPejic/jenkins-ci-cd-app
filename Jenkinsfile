@@ -24,7 +24,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
-                ssh -i /tmp/EC2-Ubuntu-Key.pem ubuntu@100.58.114.50 "
+                ssh -i /var/lib/jenkins/.ssh/app-key.pem \
+                -o StrictHostKeyChecking=no \
+                ubuntu@100.58.114.50 "
                     pkill node || true
                     cd ~/app
                     nohup node app.js > app.log 2>&1 &
