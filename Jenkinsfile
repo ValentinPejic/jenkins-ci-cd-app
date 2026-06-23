@@ -20,5 +20,16 @@ pipeline {
                 sh 'python3 app.py'
             }
         }
+
+        stage('Deploy') {
+            steps {
+                sh '''
+                ssh ubuntu@54.221.66.255 "
+                    pkill node || true
+                    nohup node app.js > app.log 2>&1 &
+                "
+                '''
+            }
+        }
     }
 }
