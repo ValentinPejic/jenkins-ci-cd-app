@@ -17,7 +17,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'python3 app.py'
+                echo "No tests for Node app"
             }
         }
 
